@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seewald Werkzeug-Handel</title>
+    <style>
+        :root { --primary: #e44d26; --dark: #2c3e50; --light: #f4f4f4; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.4; margin: 0; color: #333; background: #f0f2f5; }
+        
+        header { 
+            background: var(--dark); 
+            color: white; 
+            padding: 2rem 1.5rem; 
+            text-align: center; 
+            position: relative; 
+            min-height: 120px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header h1 { margin: 0; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 1px; }
+        header p { 
+            margin: 10px 0 0 0; 
+            font-size: 1.4rem; 
+            color: var(--primary); 
+            font-weight: bold; 
+            border-top: 2px solid var(--primary); 
+            display: inline-block;
+            padding-top: 5px;
+        }
+
+        .logo-container { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); }
+        .logo-container img { max-height: 110px; width: auto; }
+        
+        .container { 
+            max-width: 1400px; 
+            margin: 2rem auto; 
+            padding: 0 20px; 
+            display: grid; 
+            grid-template-columns: 200px 1fr 400px; 
+            gap: 20px; 
+        }
+
+        .side-column { display: flex; flex-direction: column; gap: 15px; }
+        .side-column img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #fff; }
+
+        @media (max-width: 1100px) {
+            .container { grid-template-columns: 1fr; } 
+            .side-column { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); } 
+            .logo-container { position: static; transform: none; margin-top: 15px; }
+        }
+
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .price-tag { font-size: 1.5rem; color: var(--primary); font-weight: bold; }
+        input, select, button { width: 100%; padding: 10px; margin: 5px 0 10px 0; border-radius: 4px; border: 1px solid #ccc; box-sizing: border-box; }
+        button { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 5px 0; font-size: 0.85rem; }
+        .remove-btn { color: red; cursor: pointer; font-weight: bold; width: auto; background: none; border: none; padding: 0 5px; }
+        .form-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        footer { background: #ddd; padding: 40px 20px; margin-top: 50px; font-size: 0.85rem; border-top: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Seewald Tools</h1>
+    <p>Profi-Werkzeuge: Forstnerbohrer & Klemmschrauben</p>
+    <div class="logo-container">
+        <img src="logo.png" alt="Seewald Logo" onerror="this.style.display='none'">
+    </div>
+</header>
+
+<div class="container">
+    <aside class="side-column">
+        <img src="oben-links.jpg.jfif" alt="Bohrer Oben Links">
+        <img src="unten-links.jpg.png" alt="Bohrer Unten Links">
+        <img src="oben-rechts.jpg.png" alt="Bild Oben Rechts">
+        <img src="unten-rechts.jpg.png" alt="Bild Unten Rechts">
+        <img src="Schraube.PNG" alt="Schraube">
+        <img src="Schraube1.PNG" alt="Schraube Detail">
+        <img src="Screenshot.png" alt="Screenshot">
+        <img src="20250919_165433.jpg" alt="Einsatzboxen">
+    </aside>
+    
+    <main>
+        <div class="card">
+            <h2>Forstnerbohrer: Durchmesser wählen</h2>
+            <select id="select-bohrer">
+                <optgroup label="Gesamtlänge 88mm | Ø10 - Ø35 Schaft Ø8 | Ø36 - Ø55 Schaft Ø10">
+                    <option value="10mm (88)|7.99">10 mm - 7,99 €</option>
+                    <option value="12mm (88)|8.99">12 mm - 8,99 €</option>
+                    <option value="13mm (88)|15.99">13 mm - 15,99 €</option>
+                    <option value="14mm (88)|9.99">14 mm - 9,99 €</option>
+                    <option value="15mm (88)|9.99">15 mm - 9,99 €</option>
+                    <option value="16mm (88)|9.99">16 mm - 9,99 €</option>
+                    <option value="18mm (88)|10.99">18 mm - 10,99 €</option>
+                    <option value="19mm (88)|10.99">19 mm - 10,99 €</option>
+                    <option value="20mm (88)|10.99">20 mm - 10,99 €</option>
+                    <option value="22mm (88)|10.99">22 mm - 10,99 €</option>
+                    <option value="25mm (88)|11.99">25 mm - 11,99 €</option>
+                    <option value="28mm (88)|11.99">28 mm - 11,99 €</option>
+                    <option value="30mm (88)|11.99">30 mm - 11,99 €</option>
+                    <option value="32mm (88)|13.99">32 mm - 13,99 €</option>
+                    <option value="35mm (88)|14.99">35 mm - 14,99 €</option>
+                    <option value="38mm (88)|15.99">38 mm - 15,99 €</option>
+                    <option value="40mm (88)|16.99">40 mm - 16,99 €</option>
+                    <option value="44mm (88)|17.99">44 mm - 17,99 €</option>
+                    <option value="45mm (88)|18.99">45 mm - 18,99 €</option>
+                    <option value="50mm (88)|18.99">50 mm - 18,99 €</option>
+                    <option value="55mm (88)|22.99">55 mm - 22,99 €</option>
+                </optgroup>
+                <optgroup label="Gesamtlänge 150mm | Schaft Ø13">
+                    <option value="60mm (150)|28.99">60 mm - 28,99 €</option>
+                    <option value="65mm (150)|34.99">65 mm - 34,99 €</option>
+                    <option value="70mm (150)|37.99">70 mm - 37,99 €</option>
+                    <option value="75mm (150)|41.99">75 mm - 41,99 €</option>
+                    <option value="80mm (150)|44.99">80 mm - 44,99 €</option>
+                    <option value="85mm (150)|49.99">85 mm - 49,99 €</option>
+                    <option value="90mm (150)|51.99">90 mm - 51,99 €</option>
+                    <option value="95mm (150)|60.99">95 mm - 60,99 €</option>
+                    <option value="100mm (150)|64.99">100 mm - 64,99 €</option>
+                </optgroup>
+            </select>
+            <button onclick="addToCartFromSelect('select-bohrer')">Bohrer hinzufügen</button>
+        </div>
+
+        <div class="card">
+            <h2>Unsere Spar-Sets (Bohrer)</h2>
+            <div class="form-group">
+                <div style="border: 1px solid #eee; padding: 10px; text-align: center;">
+                    <h3>5-teiliges Set (15-35mm)</h3>
+                    <p class="price-tag">30,00 €</p>
+                    <button onclick="addToCart('5-teiliges Bohrer Set', 30.00)">Hinzufügen</button>
+                </div>
+                <div style="border: 1px solid #eee; padding: 10px; text-align: center;">
+                    <h3>16-teiliges Profi-Set</h3>
+                    <p class="price-tag">105,00 €</p>
+                    <button onclick="addToCart('16-teiliges Bohrer Set', 105.00)">Hinzufügen</button>
+                </div>
+            </div>
+        </div>
+
+        <hr style="margin: 30px 0; border: 0; border-top: 2px dashed #ccc;">
+
+        <div class="card">
+            <h2>Torx-Klemmschrauben (10 Stück)</h2>
+            <select id="select-schrauben">
+                <optgroup label="Sofort Lieferbar">
+                    <option value="M2 × 4 mm (10 Stück)|15">M2 × 4 mm - 15 €</option>
+                    <option value="M2 × 8 mm (10 Stück)|15">M2 × 8 mm - 15 €</option>
+                    <option value="M2,5 × 5 mm (10 Stück)|15">M2,5 × 5 mm - 15 €</option>
+		    <option value="M2,5 × 6 mm (10 Stück)|15">M2,5 × 6 mm - 15 €</option>
+		    <option value="M3 × 8 mm (10 Stück)|15">M3 × 8 mm - 15 €</option>
+		    <option value="M3 × 10 mm (10 Stück)|15">M3 × 10 mm - 15 €</option>
+		    <option value="M3 × 12 mm (10 Stück)|15">M3 × 12 mm - 15 €</option>
+   		    <option value="M3,5 × 8 mm (10 Stück)|15">M3,5 × 8 mm - 15 €</option>
+		    <option value="M3,5 × 10 mm (10 Stück)|15">M3,5 × 10 mm - 15 €</option>
+		    <option value="M4 × 12 mm (10 Stück)|15">M4 × 12 mm - 15 €</option>
+		    <option value="M5 × 12 mm (10 Stück)|18">M5 × 12 mm - 18 €</option>
+		    <option value="M5 × 16 mm (10 Stück)|18">M5 × 16 mm - 18 €</option>
+		    <option value="M6 × 18 mm (10 Stück)|25">M6 × 18 mm - 25 €</option>
+                </optgroup>
+                <optgroup label="Größen | Nicht mehr vorrätig 3 bis 5 Wochen Lieferzeit">
+                    <option value="M2 × 5 mm (10 Stück)|15">M2 × 5 mm - 15 €</option>
+                    <option value="M2 × 6 mm (10 Stück)|15">M2 × 6 mm - 15 €</option>
+                    <option value="M2,2 × 4 mm (10 Stück)|15">M2,2 × 4 mm - 15 €</option>
+                    <option value="M2,2 × 5 mm (10 Stück)|15">M2,2 × 5 mm - 15 €</option>
+                    <option value="M2,2 × 6 mm (10 Stück)|15">M2,2 × 6 mm - 15 €</option>
+                    <option value="M2,2 × 8 mm (10 Stück)|15">M2,2 × 8 mm - 15 €</option>
+                    <option value="M2,5 × 7 mm (10 Stück)|15">M2,5 × 7 mm - 15 €</option>
+                    <option value="M2,5 × 8 mm (10 Stück)|15">M2,5 × 8 mm - 15 €</option>
+                    <option value="M2,5 × 10 mm (10 Stück)|15">M2,5 × 10 mm - 15 €</option>
+		    <option value="M3 × 6 mm (10 Stück)|15">M3 × 6 mm - 15 €</option>
+		    <option value="M3 × 7 mm (10 Stück)|15">M3 × 7 mm - 15 €</option>
+		    <option value="M3,5 × 7 mm (10 Stück)|15">M3,5 × 7 mm - 15 €</option>
+		    <option value="M4 × 8 mm (10 Stück)|15">M4 × 8 mm - 15 €</option>
+		    <option value="M4 × 10 mm (10 Stück)|15">M4 × 10 mm - 15 €</option>
+		    <option value="M4 × 14 mm (10 Stück)|15">M4 × 14 mm - 15 €</option>
+		    <option value="M4 × 16 mm (10 Stück)|15">M4 × 16 mm - 15 €</option>
+		    <option value="M4,5 × 10 mm (10 Stück)|15">M4,5 × 10 mm - 15 €</option>
+		    <option value="M4,5 × 12 mm (10 Stück)|15">M4,5 × 12 mm - 15 €</option>
+		    <option value="M4,5 × 14 mm (10 Stück)|15">M4,5 × 14 mm - 15 €</option>
+		    <option value="M4,5 × 16 mm (10 Stück)|15">M4,5 × 16 mm - 15 €</option>
+		    <option value="M5 × 10 mm (10 Stück)|15">M5 × 10 mm - 15 €</option>
+		    <option value="M5 × 14 mm (10 Stück)|18">M5 × 14 mm - 18 €</option>
+		    <option value="M6 × 10 mm (10 Stück)|20">M6 × 10 mm - 20 €</option>
+		    <option value="M6 × 12 mm (10 Stück)|20">M6 × 12 mm - 20 €</option>
+		    <option value="M6 × 14 mm (10 Stück)|20">M6 × 14 mm - 20 €</option>
+		    <option value="M6 × 16 mm (10 Stück)|20">M6 × 16 mm - 20 €</option>
+		    <option value="M6 × 20 mm (10 Stück)|25">M6 × 20 mm - 25 €</option>
+                </optgroup>
+            </select>
+            <button onclick="addToCartFromSelect('select-schrauben')">Schrauben hinzufügen</button>
+        </div>
+
+        <div class="card">
+            <h2>Einsatzboxen für WSP</h2>
+            <div class="form-group">
+                <div style="border: 1px solid #eee; padding: 10px; text-align: center;">
+                    <h3>10x Einsatzboxen</h3>
+                    <p class="price-tag">15,00 €</p>
+                    <button onclick="addToCart('10x Einsatzboxen', 15.00)">Hinzufügen</button>
+                </div>
+                <div style="border: 1px solid #eee; padding: 10px; text-align: center;">
+                    <h3>50x Einsatzboxen</h3>
+                    <p class="price-tag">60,00 €</p>
+                    <button onclick="addToCart('50x Einsatzboxen', 60.00)">Hinzufügen</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+        <div class="card">
+            <h3>Warenkorb</h3>
+            <div id="cart-items">Leer</div>
+            <hr>
+            <div>
+                Summe: <span id="subtotal">0,00</span> €<br>
+                Versand: <span id="shipping">0,00</span> €<br>
+                <strong>Gesamt: <span id="total">0,00</span> €</strong>
+            </div>
+
+            <h4 style="margin-top:15px; border-top:1px solid #eee; padding-top:10px;">Lieferadresse</h4>
+            <form id="order-form" oninput="validateForm()">
+                <select id="anrede"><option>Herr</option><option>Frau</option><option>Firma</option></select>
+                <input type="text" id="firma" placeholder="Firma (Optional)">
+                <div class="form-group">
+                    <input type="text" id="vorname" placeholder="Vorname *" required>
+                    <input type="text" id="nachname" placeholder="Nachname *" required>
+                </div>
+                <input type="text" id="strasse" placeholder="Straße & Nr. *" required>
+                <div class="form-group">
+                    <input type="text" id="plz" placeholder="PLZ *" required>
+                    <input type="text" id="stadt" placeholder="Stadt *" required>
+                </div>
+            </form>
+
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="andreys.83@hotmail.com">
+                <input type="hidden" name="item_name" id="pp-item-name" value="Werkzeugbestellung">
+                <input type="hidden" name="amount" id="pp-amount" value="0.00">
+                <input type="hidden" name="currency_code" value="EUR">
+                <button type="submit" id="checkout-btn" disabled style="background: #ffc439; color: black; padding: 15px;">Jetzt mit PayPal bezahlen</button>
+            </form>
+        </div>
+    </aside>
+</div>
+
+<footer>
+    <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+            <strong>Impressum:</strong><br>
+            Andreas Seewald, Nürnberger Str. 25, 85055 Ingolstadt<br>
+            Tel: 0171 8241679 | E-Mail: andreys.83@hotmail.com
+        </div>
+        <div>
+            <strong>Rechtliches:</strong><br>
+            Versandkostenfrei ab 150 €! (Sonst 2,99 €)
+        </div>
+    </div>
+</footer>
+
+<script>
+    let cart = [];
+    function addToCartFromSelect(id) {
+        const s = document.getElementById(id);
+        const [n, p] = s.value.split('|');
+        addToCart(n, parseFloat(p));
+    }
+    function addToCart(name, price) {
+        const item = cart.find(i => i.name === name);
+        if (item) item.qty++; else cart.push({name, price, qty: 1});
+        renderCart();
+    }
+    function removeFromCart(index) { cart.splice(index, 1); renderCart(); }
+    function renderCart() {
+        const c = document.getElementById('cart-items');
+        c.innerHTML = cart.length ? '' : 'Leer';
+        let sub = 0;
+        let names = [];
+        cart.forEach((item, i) => {
+            sub += item.price * item.qty;
+            names.push(`${item.qty}x ${item.name}`);
+            c.innerHTML += `<div class="cart-item"><span>${item.qty}x ${item.name}</span><span>${(item.price*item.qty).toFixed(2)}€ <button class="remove-btn" onclick="removeFromCart(${i})">×</button></span></div>`;
+        });
+        const ship = (sub >= 150 || sub === 0) ? 0 : 2.99;
+        const total = sub + ship;
+        document.getElementById('subtotal').innerText = sub.toFixed(2).replace('.',',');
+        document.getElementById('shipping').innerText = ship.toFixed(2).replace('.',',');
+        document.getElementById('total').innerText = total.toFixed(2).replace('.',',');
+        document.getElementById('pp-amount').value = total.toFixed(2);
+        document.getElementById('pp-item-name').value = "Bestellung: " + names.join(", ");
+        validateForm();
+    }
+    function validateForm() {
+        const fields = ['vorname', 'nachname', 'strasse', 'plz', 'stadt'];
+        const allFilled = fields.every(id => document.getElementById(id).value.trim() !== '');
+        document.getElementById('checkout-btn').disabled = !(allFilled && cart.length > 0);
+    }
+</script>
+</body>
+</html>
