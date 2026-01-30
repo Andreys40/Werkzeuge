@@ -44,12 +44,15 @@
     gap: 15px;
         }
 
-        .side-column { 
-    display: grid; 
-    grid-template-columns: 200px 200px; /* Zwei Bilder nebeneinander */
-    gap: 10px; 
-    justify-content: start; /* Richtet die Bilder innerhalb der Spalte links aus */
-    align-content: start;
+        .side-column img { 
+    width: 200px;    /* Festgelegte Breite */
+    height: 200px;   /* Festgelegte Höhe - macht alle Bilder quadratisch */
+    object-fit: cover; /* DAS IST WICHTIG: Schneidet das Bild mittig zu, damit es nicht verzerrt wird */
+    object-position: center; /* Zentriert den Bildinhalt */
+    border-radius: 4px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    background: #fff;
+    display: block;
         }
 
         .side-column img { 
@@ -344,6 +347,7 @@
 </body>
 
 </html>
+
 
 
 
