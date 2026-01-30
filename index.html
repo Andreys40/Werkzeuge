@@ -36,16 +36,29 @@
         .logo-container img { max-height: 110px; width: auto; }
         
         .container { 
-            max-width: 1400px; 
-            margin: 2rem auto; 
-            padding: 0 20px; 
-            display: grid; 
-            grid-template-columns: 200px 1fr 400px; 
-            gap: 20px; 
+    max-width: 100%; /* Vorher 1400px - jetzt volle Breite */
+    margin: 2rem 0;  /* Vorher 2rem auto - jetzt fest am linken Rand */
+    padding: 0 10px; /* Vorher 20px - jetzt nur noch 10px Abstand zum Rand */
+    display: grid; 
+    grid-template-columns: 415px 1fr 400px; /* Die erste Spalte für die Bilder */
+    gap: 15px;
         }
 
-        .side-column { display: flex; flex-direction: column; gap: 15px; }
-        .side-column img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #fff; }
+        .side-column { 
+    display: grid; 
+    grid-template-columns: 200px 200px; /* Zwei Bilder nebeneinander */
+    gap: 10px; 
+    justify-content: start; /* Richtet die Bilder innerhalb der Spalte links aus */
+    align-content: start;
+        }
+
+        .side-column img { 
+            width: 200px; 
+            height: auto; 
+            border-radius: 4px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+            background: #fff;}
+
 
         @media (max-width: 1100px) {
             .container { grid-template-columns: 1fr; } 
@@ -68,7 +81,7 @@
 
 <header>
     <h1>Seewald Tools</h1>
-    <p>Profi-Werkzeuge: Forstnerbohrer & Klemmschrauben</p>
+    <p>Profi-Werkzeuge: Forstnerbohrer,Einsatzboxen für WSP & Klemmschrauben</p>
     <div class="logo-container">
         <img src="logo.png" alt="Seewald Logo" onerror="this.style.display='none'">
     </div>
@@ -307,4 +320,5 @@
 </body>
 
 </html>
+
 
