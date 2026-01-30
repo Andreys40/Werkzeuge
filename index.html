@@ -67,16 +67,28 @@
     align-content: start;
         }
 
-        .side-column img { 
-    width: 200px;    /* Festgelegte Breite */
-    height: 200px;   /* Festgelegte Höhe - macht alle Bilder quadratisch */
-    object-fit: cover; /* DAS IST WICHTIG: Schneidet das Bild mittig zu, damit es nicht verzerrt wird */
-    object-position: center; /* Zentriert den Bildinhalt */
+        /* --- BILDER-ZOOM EFFEKT LINKS --- */
+.side-column img { 
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
     border-radius: 4px; 
     box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
     background: #fff;
-    display: block;}
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Macht die Bewegung weich */
+    cursor: zoom-in;
+    position: relative;
+    z-index: 1;
+}
 
+/* Wenn man mit der Maus drüberfährt */
+.side-column img:hover {
+    transform: scale(2.2); /* Vergrößert das Bild */
+    z-index: 999;          /* Schiebt es über alle anderen Elemente */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+    transform-origin: left center; /* Vergrößert sich von links nach rechts */
+}
 
         @media (max-width: 1100px) {
             .container { grid-template-columns: 1fr; } 
@@ -461,6 +473,7 @@ Versandkostenfrei ab 150 €! (Sonst 2,99 €)
 </body>
 
 </html>
+
 
 
 
