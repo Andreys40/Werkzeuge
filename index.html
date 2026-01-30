@@ -32,8 +32,23 @@
             padding-top: 5px;
         }
 
-        .logo-container { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); }
-        .logo-container img { max-height: 110px; width: auto; }
+        /* Container für die Positionierung */
+.logo-container { 
+    position: absolute; 
+    right: 30px; /* Abstand zum rechten Rand */
+    top: 50%; 
+    transform: translateY(-50%);}
+
+/* Das Logo selbst */
+.logo-container img { 
+    height: 140px;      /* Größer gemacht (vorher 110px) */
+    width: 140px;       /* Breite gleich Höhe für einen perfekten Kreis */
+    object-fit: cover;  /* Inhalt wird sauber eingepasst */
+    border-radius: 50%; /* Macht es rund */
+    border: 3px solid var(--primary); /* Ein dünner orangefarbener Rahmen passend zum Design */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Ein Schatten lässt es edel wirken */
+    background: white;  /* Weißer Hintergrund, falls das Logo transparent ist */
+}
         
         .container { 
     max-width: 100%; /* Vorher 1400px - jetzt volle Breite */
@@ -446,6 +461,7 @@ Versandkostenfrei ab 150 €! (Sonst 2,99 €)
 </body>
 
 </html>
+
 
 
 
