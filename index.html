@@ -361,7 +361,7 @@
     </main>
 
 
-    <aside>
+ <aside>
         <div class="card">
             <h3>🛒 Warenkorb</h3>
             <div id="cart-items">Leer</div>
@@ -371,59 +371,59 @@
                 Versand: <span id="shipping">0,00</span> €<br>
                 <strong>Gesamt: <span id="total">0,00</span> €</strong>
             </div>
-<p style="font-size: 0.8rem; color: #666; margin-top: 10px;">
-    💳 <b>PayPal Service:</b> Ratenzahlung oder "Bezahlen nach 30 Tagen" beim Check-out verfügbar.
-</p>
-<div
-    id="paypal-banner"
-    data-pp-message
-    data-pp-style-layout="text"
-    data-pp-style-logo-type="inline"
-    data-pp-style-text-color="black"
-    data-pp-amount="0.00">
-</div>
-    </div>  
-            <h4 style="margin-top:15px; border-top:1px solid #eee; padding-top:10px;">PayPal Lieferadresse eingeben</h4>
-            <form id="order-form" oninput="validateForm()">
-                <select id="anrede"><option>Herr</option><option>Frau</option><option>Firma</option></select>
-                <input type="text" id="firma" placeholder="Firma (Optional)">
-                <div class="form-group">
-                    <input type="text" id="vorname" placeholder="Vorname *" required>
-                    <input type="text" id="nachname" placeholder="Nachname *" required>
-                </div>
-                <input type="text" id="strasse" placeholder="Straße & Nr. *" required>
-                <div class="form-group">
-                    <input type="text" id="plz" placeholder="PLZ *" required>
-                    <input type="text" id="stadt" placeholder="Stadt *" required>
-                </div>
-            </form>
+            
+            <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">
+                💳 <b>PayPal Service:</b> Ratenzahlung / 30 Tage möglich.
+            </p>
+            <div id="paypal-banner" data-pp-message data-pp-style-layout="text" data-pp-amount="0.00"></div>
 
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                <input type="hidden" name="cmd" value="_xclick">
-                <input type="hidden" name="business" value="andreys.83@hotmail.com">
-                <input type="hidden" name="item_name" id="pp-item-name" value="Werkzeugbestellung">
-                <input type="hidden" name="amount" id="pp-amount" value="0.00">
-                <input type="hidden" name="currency_code" value="EUR">
-				 <i>Hinweis: Der Versand erfolgt an die bei PayPal hinterlegte Lieferadresse. Bitte prüfen Sie diese beim Bezahlen.</i>
-                <button type="submit" id="checkout-btn" disabled style="background: #ffc439; color: black; padding: 15px;">Jetzt mit PayPal bezahlen</button>
-            </form>
-			<div style="text-align: center; border: 2px solid #25D366; border-radius: 8px; padding: 15px; margin-top: 20px; background: #fff;">
+            <h4 style="margin-top:20px; border-top:1px solid #eee; padding-top:10px;">Lieferadresse</h4>
+            <select id="anrede"><option>Herr</option><option>Frau</option><option>Firma</option></select>
+            <input type="text" id="firma" placeholder="Firma (Optional)">
+            <div class="form-group">
+                <input type="text" id="vorname" placeholder="Vorname *" oninput="validateForm()">
+                <input type="text" id="nachname" placeholder="Nachname *" oninput="validateForm()">
+            </div>
+            <input type="email" id="email" placeholder="E-Mail Adresse *" oninput="validateForm()">
+            <input type="text" id="strasse" placeholder="Straße & Nr. *" oninput="validateForm()">
+            <div class="form-group">
+                <input type="text" id="plz" placeholder="PLZ *" oninput="validateForm()">
+                <input type="text" id="stadt" placeholder="Stadt *" oninput="validateForm()">
+            </div>
+
+            <h4 style="margin-top:20px;">Zahlungsmethode</h4>
+            <div style="background: #f9f9f9; padding: 10px; border-radius: 6px; text-align: left;">
+                <label style="display: block; margin-bottom: 10px; cursor: pointer;">
+                    <input type="radio" name="payment" value="paypal" checked onclick="togglePayment()"> <strong>PayPal</strong>
+                </label>
+                <label style="display: block; cursor: pointer;">
+                    <input type="radio" name="payment" value="whatsapp" onclick="togglePayment()"> <strong>Vorkasse / WhatsApp</strong>
+                </label>
+            </div>
+
+            <div id="paypal-section" style="margin-top: 20px;">
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                    <input type="hidden" name="cmd" value="_xclick">
+                    <input type="hidden" name="business" value="andreys.83@hotmail.com">
+                    <input type="hidden" name="item_name" id="pp-item-name" value="Werkzeugbestellung">
+                    <input type="hidden" name="amount" id="pp-amount" value="0.00">
+                    <input type="hidden" name="currency_code" value="EUR">
+                    <button type="submit" id="checkout-btn" disabled style="background: #ffc439; color: black; border-radius: 25px; padding: 15px;">Jetzt mit PayPal bezahlen</button>
+                </form>
+            </div>
+
+            <div id="whatsapp-section" style="display: none; margin-top: 20px;">
+                <button onclick="sendWhatsApp()" class="btn-whatsapp">✅ Per WhatsApp bestellen</button>
+            </div>
+
+            <div style="text-align: center; border: 2px solid #25D366; border-radius: 8px; padding: 15px; margin-top: 20px; background: #fff;">
                 <h4 style="margin: 0 0 10px 0; color: #2c3e50;">Schnellanfrage</h4>
                 <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
                     <a href="https://wa.me/491718241679" target="_blank" style="text-decoration: none;">
-                        <div style="background: #25D366; color: white; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 0.9rem;">
-                            🟢 WhatsApp
-                        </div>
-                    </a>
-                    
-                    <a href="tel:+491718241679" style="text-decoration: none;">
-                        <div style="background: #3498db; color: white; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 0.9rem;">
-                            📞 Anrufen
-                        </div>
+                        <div style="background: #25D366; color: white; padding: 10px; border-radius: 5px; font-weight: bold;">🟢 WhatsApp</div>
                     </a>
                 </div>
             </div>
-        </div> </aside>
         </div>
     </aside>
 </div>
@@ -433,68 +433,101 @@
         <div>
             <strong>Impressum & Kontakt:</strong><br>
             Andreas Seewald | Nürnberger Str. 25 | 85055 Ingolstadt<br>
-            Tel: 0171 8241679 | USt-ID: DE453482781 | E-Mail: andreys.83@hotmail.com
+            Tel: 0171 8241679 | E-Mail: andreys.83@hotmail.com
         </div>
         <div>
             <strong>Rechtliches:</strong><br>
             2 Jahre Gewährleistung. 14 Tage Widerrufsrecht.<br>
-Versandkostenfrei ab 150 €! (Sonst 2,99 €)
+            Versandkostenfrei ab 150 €! (Sonst 2,99 €)
         </div>
     </div>
 </footer>
 
 <script>
     let cart = [];
+
     function addToCartFromSelect(id) {
         const s = document.getElementById(id);
         const [n, p] = s.value.split('|');
         addToCart(n, parseFloat(p));
     }
+
     function addToCart(name, price) {
         const item = cart.find(i => i.name === name);
         if (item) item.qty++; else cart.push({name, price, qty: 1});
         renderCart();
     }
+
     function removeFromCart(index) { cart.splice(index, 1); renderCart(); }
+
     function renderCart() {
         const c = document.getElementById('cart-items');
         c.innerHTML = cart.length ? '' : 'Leer';
-        let sub = 0;
-        let names = [];
+        let sub = 0; let names = [];
+        
         cart.forEach((item, i) => {
             sub += item.price * item.qty;
             names.push(`${item.qty}x ${item.name}`);
             c.innerHTML += `<div class="cart-item"><span>${item.qty}x ${item.name}</span><span>${(item.price*item.qty).toFixed(2)}€ <button class="remove-btn" onclick="removeFromCart(${i})">×</button></span></div>`;
         });
+
         const ship = (sub >= 150 || sub === 0) ? 0 : 2.99;
         const total = sub + ship;
-const ppBanner = document.getElementById('paypal-banner');
-    if (ppBanner) {
-        // Wir setzen den aktuellen Betrag für PayPal
-        ppBanner.setAttribute('data-pp-amount', total.toFixed(2));
-        
-        // Dieser Befehl erzwingt, dass PayPal die Nachricht neu lädt
-        if (window.PayPalSDK && window.PayPalSDK.Messages) {
-            window.PayPalSDK.Messages().render('#paypal-banner');
-        }
-    }
 
         document.getElementById('subtotal').innerText = sub.toFixed(2).replace('.',',');
         document.getElementById('shipping').innerText = ship.toFixed(2).replace('.',',');
         document.getElementById('total').innerText = total.toFixed(2).replace('.',',');
+        
         document.getElementById('pp-amount').value = total.toFixed(2);
         document.getElementById('pp-item-name').value = "Bestellung: " + names.join(", ");
+
+        const ppBanner = document.getElementById('paypal-banner');
+        if (ppBanner) {
+            ppBanner.setAttribute('data-pp-amount', total.toFixed(2));
+            if (window.PayPalSDK && window.PayPalSDK.Messages) {
+                window.PayPalSDK.Messages().render('#paypal-banner');
+            }
+        }
         validateForm();
     }
+
+    function togglePayment() {
+        const method = document.querySelector('input[name="payment"]:checked').value;
+        document.getElementById('paypal-section').style.display = (method === 'paypal') ? 'block' : 'none';
+        document.getElementById('whatsapp-section').style.display = (method === 'whatsapp') ? 'block' : 'none';
+    }
+
+    function sendWhatsApp() {
+        const nummer = "491718241679";
+        const v = document.getElementById('vorname').value;
+        const n = document.getElementById('nachname').value;
+        const e = document.getElementById('email').value;
+        const s = document.getElementById('strasse').value;
+        const p = document.getElementById('plz').value;
+        const st = document.getElementById('stadt').value;
+        const total = document.getElementById('total').innerText;
+
+        if(!v || !n || !e || !s) { alert("Bitte füllen Sie die Pflichtfelder (*) aus."); return; }
+
+        let liste = "";
+        cart.forEach(item => { liste += `- ${item.qty}x ${item.name} (${(item.price*item.qty).toFixed(2)}€)\n`; });
+
+        const text = `Hallo Seewald Tools,\n\nIch bestelle:\n${liste}\nGesamt: ${total}€\n\nAdresse:\n${v} ${n}\n${s}\n${p} ${st}\nE-Mail: ${e}`;
+        window.open(`https://wa.me/${nummer}?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
     function validateForm() {
-        const fields = ['vorname', 'nachname', 'strasse', 'plz', 'stadt'];
-        const allFilled = fields.every(id => document.getElementById(id).value.trim() !== '');
+        const fields = ['vorname', 'nachname', 'strasse', 'plz', 'stadt', 'email'];
+        const allFilled = fields.every(id => {
+            const el = document.getElementById(id);
+            return el && el.value.trim() !== '';
+        });
         document.getElementById('checkout-btn').disabled = !(allFilled && cart.length > 0);
     }
 </script>
 </body>
-
 </html>
+
 
 
 
