@@ -4,91 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seewald Werkzeug-Handel</title>
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAGjBbCy5qINSzruDL-PoRfCn0CgyxYeIORc7vTZE2aVOIPkFNEY6xuhxVK1SMtA8cyVqeRWkqi0knsXE&currency=EUR&components=messages"></script>
+    
     <style>
         :root { --primary: #e44d26; --dark: #2c3e50; --light: #f4f4f4; }
         body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.4; margin: 0; color: #333; background: #f0f2f5; }
         
         header { 
             background: var(--dark); 
-            color: white; 
-            padding: 2rem 1.5rem; 
-            text-align: center; 
-            position: relative; 
-            min-height: 120px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 10px);
+            color: white; padding: 2rem 1.5rem; text-align: center; position: relative; min-height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
         header h1 { margin: 0; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 1px; }
-        header p { 
-            margin: 10px 0 0 0; 
-            font-size: 1.4rem; 
-            color: var(--primary); 
-            font-weight: bold; 
-            border-top: 2px solid var(--primary); 
-            display: inline-block;
-            padding-top: 5px;
-        }
+        header p { margin: 10px 0 0 0; font-size: 1.4rem; color: var(--primary); font-weight: bold; border-top: 2px solid var(--primary); display: inline-block; padding-top: 5px; }
 
-        /* Container für die Positionierung */
-.logo-container { 
-    position: absolute; 
-    right: 30px; /* Abstand zum rechten Rand */
-    top: 50%; 
-    transform: translateY(-50%);}
-
-/* Das Logo selbst */
-.logo-container img { 
-    height: 140px;      /* Größer gemacht (vorher 110px) */
-    width: 140px;       /* Breite gleich Höhe für einen perfekten Kreis */
-    object-fit: cover;  /* Inhalt wird sauber eingepasst */
-    border-radius: 50%; /* Macht es rund */
-    border: 3px solid var(--primary); /* Ein dünner orangefarbener Rahmen passend zum Design */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Ein Schatten lässt es edel wirken */
-    background: white;  /* Weißer Hintergrund, falls das Logo transparent ist */
-}
+        .logo-container { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); }
+        .logo-container img { height: 140px; width: 140px; object-fit: cover; border-radius: 50%; border: 3px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: white; }
         
-        .container { 
-    max-width: 100%; /* Vorher 1400px - jetzt volle Breite */
-    margin: 2rem 0;  /* Vorher 2rem auto - jetzt fest am linken Rand */
-    padding: 0 10px; /* Vorher 20px - jetzt nur noch 10px Abstand zum Rand */
-    display: grid; 
-    grid-template-columns: 415px 1fr 400px; /* Die erste Spalte für die Bilder */
-    gap: 15px;
+        .container { max-width: 100%; margin: 2rem 0; padding: 0 10px; display: grid; grid-template-columns: 415px 1fr 400px; gap: 15px; }
+
+        .side-column { display: grid; grid-template-columns: 200px 200px; gap: 10px; justify-content: start; align-content: start; }
+
+        .side-column img { 
+            width: 200px; height: 200px; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #fff; display: block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: zoom-in; position: relative; z-index: 1;
         }
 
-        .side-column { 
-    display: grid; 
-    grid-template-columns: 200px 200px; /* Zwei Bilder nebeneinander */
-    gap: 10px; 
-    justify-content: start; /* Richtet die Bilder innerhalb der Spalte links aus */
-    align-content: start;
-        }
-
-        /* --- BILDER-ZOOM EFFEKT LINKS --- */
-.side-column img { 
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 4px; 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
-    background: #fff;
-    display: block;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Macht die Bewegung weich */
-    cursor: zoom-in;
-    position: relative;
-    z-index: 1;
-}
-
-/* Wenn man mit der Maus drüberfährt */
-.side-column img:hover {
-    transform: scale(2.2); /* Vergrößert das Bild */
-    z-index: 999;          /* Schiebt es über alle anderen Elemente */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-    transform-origin: left center; /* Vergrößert sich von links nach rechts */
-}
+        .side-column img:hover { transform: scale(2.2); z-index: 999; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform-origin: left center; }
 
         @media (max-width: 1100px) {
             .container { grid-template-columns: 1fr; } 
@@ -105,6 +48,7 @@
         .remove-btn { color: red; cursor: pointer; font-weight: bold; width: auto; background: none; border: none; padding: 0 5px; }
         .form-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         footer { background: #ddd; padding: 40px 20px; margin-top: 50px; font-size: 0.85rem; border-top: 1px solid #ccc; }
+        .btn-whatsapp { background: #25D366; color: white; font-size: 1.1rem; padding: 15px; border-radius: 30px; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -527,6 +471,7 @@
 </script>
 </body>
 </html>
+
 
 
 
