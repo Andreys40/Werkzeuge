@@ -371,7 +371,18 @@
                 Versand: <span id="shipping">0,00</span> €<br>
                 <strong>Gesamt: <span id="total">0,00</span> €</strong>
             </div>
-
+<p style="font-size: 0.8rem; color: #666; margin-top: 10px;">
+    💳 <b>PayPal Service:</b> Ratenzahlung oder "Bezahlen nach 30 Tagen" beim Check-out verfügbar.
+</p>
+<div
+    id="paypal-banner"
+    data-pp-message
+    data-pp-style-layout="text"
+    data-pp-style-logo-type="inline"
+    data-pp-style-text-color="black"
+    data-pp-amount="0.00">
+</div>
+    </div>  
             <h4 style="margin-top:15px; border-top:1px solid #eee; padding-top:10px;">PayPal Lieferadresse eingeben</h4>
             <form id="order-form" oninput="validateForm()">
                 <select id="anrede"><option>Herr</option><option>Frau</option><option>Firma</option></select>
@@ -457,6 +468,17 @@ Versandkostenfrei ab 150 €! (Sonst 2,99 €)
         });
         const ship = (sub >= 150 || sub === 0) ? 0 : 2.99;
         const total = sub + ship;
+const ppBanner = document.getElementById('paypal-banner');
+    if (ppBanner) {
+        // Wir setzen den aktuellen Betrag für PayPal
+        ppBanner.setAttribute('data-pp-amount', total.toFixed(2));
+        
+        // Dieser Befehl erzwingt, dass PayPal die Nachricht neu lädt
+        if (window.PayPalSDK && window.PayPalSDK.Messages) {
+            window.PayPalSDK.Messages().render('#paypal-banner');
+        }
+    }
+
         document.getElementById('subtotal').innerText = sub.toFixed(2).replace('.',',');
         document.getElementById('shipping').innerText = ship.toFixed(2).replace('.',',');
         document.getElementById('total').innerText = total.toFixed(2).replace('.',',');
@@ -473,6 +495,7 @@ Versandkostenfrei ab 150 €! (Sonst 2,99 €)
 </body>
 
 </html>
+
 
 
 
